@@ -1,21 +1,21 @@
 import './ExpenseForm.css';
 import React,{useState} from "react"
-;
-const ExpenseForm = () =>{
+import Card from './Card.jsx'
+const ExpenseForm = ({onSaveExpenseData,onCancel}) =>{
           const[title,setTitle]=useState('');
           const[amount,setAmount]=useState('');
           const[date,setDate]=useState('');
 
-const TitleChangeHandler = (event) =>{
-  console.log(event,"this is my event");
-  setTitle(event.target.value);
+ const titleHandler = (event) =>{
+            setTitle(event.target.value);
+            
+          }
 
-}
-const TitleAmountHandler = (event) =>{
+const amountHandler = (event) =>{
   setAmount(event.target.value);
   
 }
-const TitleDateHandler = (event) =>{
+const dateHandler = (event) =>{
   setDate(event.target.value);
   
 }
@@ -29,26 +29,27 @@ const expenseData={
 
 };
 console.log(expenseData,"this is my data")
+onSaveExpenseData(expenseData);
 }
   return (
     <form onSubmit={AdarshHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label >Title</label>
-          <input type="text" value={title} onChange={TitleChangeHandler}/>
+          <input type="text" value={title} onChange={titleHandler}/>
         </div>
         <div  className="new-expense__control">
           <label >Amount</label>
-          <input type="number" value={amount} onChange={TitleAmountHandler}/>
+          <input type="number" value={amount} onChange={amountHandler}/>
         </div>
         <div className="new-expense__control">
           <label >Date</label>
-          <input type="date" value={date} onChange={TitleDateHandler}/>
+          <input type="date" value={date} onChange={dateHandler}/>
         </div>
       </div>
 
       <div className='new-expense__actions'>
-        <button>Cancel</button>
+        <button type='button' onClick={onCancel}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
